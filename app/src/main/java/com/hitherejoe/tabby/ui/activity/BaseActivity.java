@@ -4,9 +4,6 @@ import android.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import com.hitherejoe.tabby.TabbyApplication;
-import com.hitherejoe.tabby.injection.component.ApplicationComponent;
-
 public class BaseActivity extends AppCompatActivity {
 
     @Override
@@ -24,9 +21,4 @@ public class BaseActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-    protected ApplicationComponent applicationComponent() {
-        return TabbyApplication.get(this).getComponent();
-    }
-
 }
