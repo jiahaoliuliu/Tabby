@@ -8,13 +8,9 @@ import android.webkit.WebViewClient;
 
 import com.hitherejoe.tabby.R;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 public class WebViewActivity extends BaseActivity {
 
-    @Bind(R.id.web_view)
-    WebView mWebView;
+    private WebView mWebView;
 
     public static final String EXTRA_URL =
             "com.hitherejoe.tabby.ui.activity.WebViewActivity.EXTRA_URL";
@@ -23,7 +19,7 @@ public class WebViewActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webview);
-        ButterKnife.bind(this);
+        mWebView = findViewById(R.id.web_view);
         String url = getIntent().getStringExtra(EXTRA_URL);
         mWebView.setWebViewClient(new WebViewClient());
         WebSettings webSettings = mWebView.getSettings();

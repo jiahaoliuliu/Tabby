@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.CheckBox;
 
 import com.hitherejoe.tabby.R;
@@ -15,9 +16,6 @@ import com.hitherejoe.tabby.util.CustomTabActivityHelper;
 import com.hitherejoe.tabby.util.ImageUtils;
 import com.hitherejoe.tabby.util.SnackbarFactory;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -26,29 +24,14 @@ import timber.log.Timber;
 
 public class MainActivity extends BaseActivity {
 
-    @Bind(R.id.check_color_toolbar)
-    CheckBox mColorToolbarCheck;
-
-    @Bind(R.id.check_show_title)
-    CheckBox mShowTitleCheck;
-
-    @Bind(R.id.check_close_icon)
-    CheckBox mCloseIconCheck;
-
-    @Bind(R.id.check_action_bar_icon)
-    CheckBox mActionBarIconCheck;
-
-    @Bind(R.id.check_menu_items)
-    CheckBox mMenuItemsCheck;
-
-    @Bind(R.id.check_custom_animations)
-    CheckBox mCustomAnimationsCheck;
-
-    @Bind(R.id.layout_main)
-    CoordinatorLayout mLayoutMainCoordinator;
-
-    @Bind(R.id.toolbar)
-    Toolbar mToolbar;
+    private CheckBox mColorToolbarCheck;
+    private CheckBox mShowTitleCheck;
+    private CheckBox mCloseIconCheck;
+    private CheckBox mActionBarIconCheck;
+    private CheckBox mMenuItemsCheck;
+    private CheckBox mCustomAnimationsCheck;
+    private CoordinatorLayout mLayoutMainCoordinator;
+    private Toolbar mToolbar;
 
     private static final String URL_ARGOS = "http://www.argos.co.uk";
 
@@ -64,9 +47,27 @@ public class MainActivity extends BaseActivity {
         applicationComponent().inject(this);
         setupCustomTabHelper();
         mSubscriptions = new CompositeSubscription();
-        ButterKnife.bind(this);
+        initViews();
         setupToolbar();
         decodeBitmaps();
+    }
+
+    private void initViews() {
+        mColorToolbarCheck = findViewById(R.id.check_color_toolbar);
+        mShowTitleCheck = findViewById(R.id.check_show_title);
+        mCloseIconCheck = findViewById(R.id.check_close_icon);
+        mActionBarIconCheck = findViewById(R.id.check_action_bar_icon);
+        mMenuItemsCheck = findViewById(R.id.check_menu_items);
+        mCustomAnimationsCheck = findViewById(R.id.check_custom_animations);
+        mLayoutMainCoordinator = findViewById(R.id.layout_main);
+        mToolbar = findViewById(R.id.toolbar);
+
+        findViewById(R.id.text_launch_site).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                openCustomTab();
+            }
+        });
     }
 
     @Override
@@ -85,11 +86,6 @@ public class MainActivity extends BaseActivity {
     protected void onStop() {
         super.onStop();
         mCustomTabActivityHelper.unbindCustomTabsService(this);
-    }
-
-    @OnClick(R.id.text_launch_site)
-    public void onLaunchSiteClick() {
-        openCustomTab();
     }
 
     private void setupToolbar() {

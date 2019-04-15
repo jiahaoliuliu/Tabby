@@ -4,7 +4,6 @@ import android.app.Application;
 import android.content.Context;
 
 import com.hitherejoe.tabby.injection.component.ApplicationComponent;
-import com.hitherejoe.tabby.injection.component.DaggerApplicationComponent;
 import com.hitherejoe.tabby.injection.module.ApplicationModule;
 
 import timber.log.Timber;
