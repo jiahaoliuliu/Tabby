@@ -33,7 +33,7 @@ public class MainActivity extends BaseActivity {
     private CoordinatorLayout mLayoutMainCoordinator;
     private Toolbar mToolbar;
 
-    private static final String URL_ARGOS = "http://www.argos.co.uk";
+    private static final String URL_ARGOS = "http://www.emirates.com";
 
     private Bitmap mActionButtonBitmap;
     private Bitmap mCloseButtonBitmap;
